@@ -37,8 +37,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 clearInterval(idInterval);
             }
         };
+        updateClock();
         idInterval = setInterval(updateClock, 1000);
     };
-    countTimer('18 june 2021');
+    countTimer('19 june 2021');
 });
 
