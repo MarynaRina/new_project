@@ -60,9 +60,6 @@ window.addEventListener('DOMContentLoaded', () => {
     toggleMenu();
 
     // pop-up
-
-
-
     const togglePopUp = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
@@ -102,11 +99,31 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
         popupClose.addEventListener('click', () => {
             popup.style.display = 'none';
         });
 
     };
     togglePopUp();
+
+    // Scroll
+    const clickAndScroll = () => {
+        const smoothLinks = document.querySelectorAll('a[href^="#"]');
+        for (const smoothLink of smoothLinks) {
+            smoothLink.addEventListener('click', e => {
+                e.preventDefault();
+                const id = smoothLink.getAttribute('href');
+
+                document.querySelector(id).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        }
+    };
+    clickAndScroll();
 });
+
+
 
