@@ -61,52 +61,52 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // pop-up
 
+
+
     const togglePopUp = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
             popupClose = document.querySelector('.popup-close'),
             popupContent = document.querySelector('.popup-content'),
+
             popupData = {
-                count: -460,
+                count: -500,
                 speed: 8,
-                startPos: -460,
-                endPos: 0
+                start: -500,
+                end: 0
             };
 
         const showPopup = () => {
-            if (popupData.startPos > popupData.endPos) {
+            if (popupData.start > popupData.end) {
                 popupData.count -= popupData.speed;
             } else {
                 popupData.count += popupData.speed;
             }
-            popupContent.style.transform = `translateX(${popupData.count}px)`;
+            popupContent.style.transform = `translate(${popupData.count}px)`;
 
-            if (popupData.startPos > popupData.endPos ?
-                popupData.count > popupData.endPos :
-                popupData.count < popupData.endPos) {
+            if (popupData.start > popupData.end ?
+                popupData.count > popupData.end :
+                popupData.count < popupData.end) {
                 requestAnimationFrame(showPopup);
             }
         };
-
         popupBtn.forEach(elem => {
             elem.addEventListener('click', () => {
                 popup.style.display = 'block';
                 if (screen.width > 768) {
-                    popupData.count = popupData.startPos;
+                    popupData.count = popupData.start;
                     requestAnimationFrame(showPopup);
                 } else {
-                    popupData.startPos = 0;
+                    popupData.start = 0;
                     popupData.count = 0;
                 }
             });
         });
-
         popupClose.addEventListener('click', () => {
             popup.style.display = 'none';
         });
 
     };
     togglePopUp();
-
 });
 
