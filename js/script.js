@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line strict
     'use strict';
+
     // timer
     const countTimer = deadline => {
         const timerHours = document.querySelector('#timer-hours'),
@@ -165,6 +166,20 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     tabs();
 
+    //slider-dots
+    const addDot = () => {
+        const portfolioItem = document.querySelectorAll('.portfolio-item'),
+            portfolioDots = document.querySelector('.portfolio-dots');
+
+        portfolioItem.forEach(() => {
+            const dot = document.createElement('li');
+            dot.classList.add('dot');
+            portfolioDots.appendChild(dot);
+        });
+        portfolioDots.children[0].classList.add('dot-active');
+    };
+    addDot();
+
     // slidere
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
@@ -258,21 +273,6 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     slider();
 
-
-    // slider-dots
-    const addDot = () => {
-        const portfolioItem = document.querySelectorAll('.portfolio-item'),
-            portfolioDots = document.querySelector('.portfolio-dots');
-
-        portfolioItem.forEach(() => {
-            const dot = document.createElement('li');
-            dot.classList.add('dot');
-            portfolioDots.appendChild(dot);
-        });
-
-        portfolioDots.children[0].classList.add('dot-active');
-    };
-    addDot();
 });
 
 
