@@ -180,13 +180,12 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     addDot();
 
-    // slidere
+    // slider
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
             dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content');
-
 
         let currentSlide = 0,
             interval;
@@ -223,7 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const target = event.target;
 
-            if (!target.matches('.portfolio-btn', '.dot')) {
+            if (!target.matches('.portfolio-btn, .dot')) {
                 return;
             }
 
@@ -268,11 +267,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 startSlide();
             }
         });
-
         startSlide(1500);
     };
     slider();
-
 });
 
 
