@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line strict
     'use strict';
+
     // timer
     const countTimer = deadline => {
         const timerHours = document.querySelector('#timer-hours'),
@@ -165,13 +166,26 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     tabs();
 
-    // slidere
+    //slider-dots
+    const addDot = () => {
+        const portfolioItem = document.querySelectorAll('.portfolio-item'),
+            portfolioDots = document.querySelector('.portfolio-dots');
+
+        portfolioItem.forEach(() => {
+            const dot = document.createElement('li');
+            dot.classList.add('dot');
+            portfolioDots.appendChild(dot);
+        });
+        portfolioDots.children[0].classList.add('dot-active');
+    };
+    addDot();
+
+    // slider
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
             dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content');
-
 
         let currentSlide = 0,
             interval;
@@ -208,7 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const target = event.target;
 
-            if (!target.matches('.portfolio-btn', '.dot')) {
+            if (!target.matches('.portfolio-btn, .dot')) {
                 return;
             }
 
@@ -253,26 +267,86 @@ window.addEventListener('DOMContentLoaded', () => {
                 startSlide();
             }
         });
-
         startSlide(1500);
     };
     slider();
 
+    const commandPhoto = () => {
+        const img = document.querySelectorAll('.command__photo');
 
-    // slider-dots
-    const addDot = () => {
-        const portfolioItem = document.querySelectorAll('.portfolio-item'),
-            portfolioDots = document.querySelector('.portfolio-dots');
+        img.forEach(element => {
+            element.addEventListener('mouseenter', event => {
+                const src = event.target.src;
 
-        portfolioItem.forEach(() => {
-            const dot = document.createElement('li');
-            dot.classList.add('dot');
-            portfolioDots.appendChild(dot);
+                event.target.src = event.target.dataset.img;
+                event.target.dataset.img = src;
+            });
+
+            element.addEventListener('mouseleave', event => {
+                const src = event.target.src;
+
+                event.target.src = event.target.dataset.img;
+                event.target.dataset.img = src;
+            });
         });
 
-        portfolioDots.children[0].classList.add('dot-active');
     };
-    addDot();
+    commandPhoto();
+
+    const inputValidation = () => {
+        const calcElem = () => {
+            const sumPlace = document.querySelectorAll('.calc-item');
+            sumPlace.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^\d]/g, '');
+                });
+            });
+        };
+        calcElem();
+
+        const form = () => {
+            const mess = document.querySelector('.mess'),
+                formName = document.getElementById('form2-name'),
+                formEmail = document.getElementById('form2-email'),
+                formPhone = document.getElementById('form2-phone');
+
+
+            mess.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/([^а-яё -])/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            formName.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1);
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            formEmail.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^a-z] @ - _ . ! ~ * '/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            formPhone.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+        };
+        form();
+    };
+    inputValidation();
 });
 
 
