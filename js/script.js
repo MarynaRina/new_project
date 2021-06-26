@@ -323,7 +323,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1);
+                event.target.value = event.target.value.split(" ").map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
