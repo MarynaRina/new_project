@@ -447,7 +447,6 @@ window.addEventListener('DOMContentLoaded', () => {
         calcBlock.addEventListener('change', event => {
             const target = event.target;
 
-
             if (target.matches('select') || target.matches('input')) {
                 countSum();
             }
