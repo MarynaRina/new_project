@@ -271,6 +271,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     slider();
 
+    // change photo
     const commandPhoto = () => {
         const img = document.querySelectorAll('.command__photo');
 
@@ -293,6 +294,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     commandPhoto();
 
+    // validation
     const inputValidation = () => {
         const calcElem = () => {
             const sumPlace = document.querySelectorAll('.calc-item');
@@ -303,7 +305,6 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         };
         calcElem();
-
 
         const form = () => {
             const mess = document.querySelector('.mess'),
