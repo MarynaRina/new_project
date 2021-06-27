@@ -338,7 +338,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             email.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                // eslint-disable-next-line no-useless-escape
+                event.target.value = event.target.value.replace(/[^a-z@\-\_.!~*']/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
@@ -365,7 +366,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             emailTwo.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                // eslint-disable-next-line no-useless-escape
+                event.target.value = event.target.value.replace(/[^a-z@\-\_.!~*']/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
@@ -392,7 +394,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             emailThree.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                // eslint-disable-next-line no-useless-escape
+                event.target.value = event.target.value.replace(/[^a-z@\-\_.!~*']/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
@@ -410,6 +413,16 @@ window.addEventListener('DOMContentLoaded', () => {
         form();
     };
     inputValidation();
+
+    //calculator
+    // const calculator = () => {
+    //     const caclBlock = document.querySelector('.calc-block'),
+    //     calcType = document.querySelector('.calc-type'),
+    //     calcType = document.querySelector('.calc-type'),
+    //     calcType = document.querySelector('.calc-type'),
+    //     calcType = document.querySelector('.calc-type'),;
+    // };
+    // calculator();
 });
 
 
