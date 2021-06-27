@@ -304,13 +304,20 @@ window.addEventListener('DOMContentLoaded', () => {
         };
         calcElem();
 
+
         const form = () => {
             const mess = document.querySelector('.mess'),
-                formName = document.getElementById('form2-name'),
-                formEmail = document.getElementById('form2-email'),
-                formPhone = document.getElementById('form2-phone');
+                name = document.getElementById('form1-name'),
+                email = document.getElementById('form1-email'),
+                phone = document.getElementById('form1-phone'),
+                nameTwo = document.getElementById('form2-name'),
+                emailTwo = document.getElementById('form2-email'),
+                phoneTwo = document.getElementById('form2-phone'),
+                nameThree = document.getElementById('form3-name'),
+                emailThree = document.getElementById('form3-email'),
+                phoneThree = document.getElementById('form3-phone');
 
-
+            //1
             mess.addEventListener('blur', event => {
                 event.target.value = event.target.value.replace(/([^а-яё -])/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
@@ -319,24 +326,79 @@ window.addEventListener('DOMContentLoaded', () => {
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
 
-            formName.addEventListener('blur', event => {
+            name.addEventListener('blur', event => {
                 event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.split(" ").map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
+                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
 
-            formEmail.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z] @ - _ . ! ~ * '/gi, '');
+
+            email.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
 
-            formPhone.addEventListener('blur', event => {
+            phone.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            // 2
+            nameTwo.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+
+            emailTwo.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            phoneTwo.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            //3
+            nameThree.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+
+            emailThree.addEventListener('blur', event => {
+                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+
+            phoneThree.addEventListener('blur', event => {
                 event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
