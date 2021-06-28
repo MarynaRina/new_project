@@ -297,7 +297,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // validation
     const inputValidation = () => {
         const calcElem = () => {
-            const sumPlace = document.querySelectorAll('.calc-item');
+            const sumPlace = document.querySelectorAll('input.calc-item');
             sumPlace.forEach(input => {
                 input.addEventListener('input', function() {
                     this.value = this.value.replace(/[^\d]/g, '');
@@ -426,6 +426,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 dayValue = 1;
             const typeValue = calcType.options[calcType.selectedIndex].value,
                 squareValue = +calcSquare.value;
+            console.log(typeValue);
+
 
             if (calcCount.value > 1) {
                 countValue += (calcCount.value - 1) / 10;
@@ -438,7 +440,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             if (typeValue && squareValue) {
-                total = price * typeValue * squareValue * countValue * dayValue;
+                total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
             }
 
             totalValue.textContent = total;
