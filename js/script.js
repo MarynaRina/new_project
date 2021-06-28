@@ -318,6 +318,39 @@ window.addEventListener('DOMContentLoaded', () => {
                 emailThree = document.getElementById('form3-email'),
                 phoneThree = document.getElementById('form3-phone');
 
+            const validPhone = elem =>  {
+                elem.addEventListener('blur', event => {
+                    event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
+                    event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                    event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+
+                });
+            };
+
+            const validEmail = elem => {
+                elem.addEventListener('blur', event => {
+                    event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                    event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                    event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+                });
+            };
+
+            const validName = elem => {
+                elem.addEventListener('blur', event => {
+                    event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
+                    event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
+                    event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
+                    event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() +
+                    e.slice(1)).join(" ");
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
+                    event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+                });
+            };
+
             //1
             mess.addEventListener('blur', event => {
                 event.target.value = event.target.value.replace(/([^а-яё -])/gi, '');
@@ -327,85 +360,18 @@ window.addEventListener('DOMContentLoaded', () => {
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
 
-            name.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
+            validName(name);
+            validName(nameTwo);
+            validName(nameThree);
 
+            validEmail(email);
+            validEmail(emailTwo);
+            validEmail(emailThree);
 
-            email.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
+            validPhone(phone);
+            validPhone(phoneTwo);
+            validPhone(phoneThree);
 
-            phone.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-            // 2
-            nameTwo.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-
-            emailTwo.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-            phoneTwo.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-            //3
-            nameThree.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() + e.slice(1)).join(" ");
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-
-            emailThree.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
-
-            phoneThree.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
-                event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
-                event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
-                event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
-            });
         };
         form();
     };
