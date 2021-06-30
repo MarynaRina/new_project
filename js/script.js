@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
         updateClock();
         idInterval = setInterval(updateClock, 1000);
     };
-    countTimer('19 june 2021');
+    countTimer('31 june 2021');
 
     // scroll
     const clickAndScroll = () => {
@@ -183,7 +183,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // slider
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
-            btn = document.querySelectorAll('.portfolio-btn'),
             dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content');
 
@@ -422,6 +421,45 @@ window.addEventListener('DOMContentLoaded', () => {
 
     };
     calc(100);
+
+    // send-ajax-form
+    const sendForm = () => {
+        const errorMessage = 'Что то пошло не так...',
+            loadMessage = 'Загрузка...',
+            successMessage = 'Спасибо! Мы с вами свяжемся!';
+
+        const form = document.getElementById('form1');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 2rem;';
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'multipart/form-data');
+            const formData = new FormData(form);
+            request.send(formData);
+
+            request.addEventListener('readystatechange', () => {
+                statusMessage.textContent = loadMessage;
+
+                if (request.readyState !== 4) {
+                    return;
+                }
+
+                if (request.status === 200) {
+                    statusMessage.textContent = successMessage;
+                } else {
+                    statusMessage.textContent = errorMessage;
+                }
+
+            });
+        });
+    };
+    sendForm();
 });
 
 
