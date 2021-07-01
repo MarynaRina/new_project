@@ -326,23 +326,24 @@ window.addEventListener('DOMContentLoaded', () => {
                 });
 
                 elem.addEventListener('input', event => {
-                    event.target.value = event.target.value.replace(/[^+\d]/g, '');
+                    event.target.value = event.target.value.replace(/[^+\d () -]/g, '');
                 });
             };
 
             const validEmail = elem => {
                 elem.addEventListener('blur', event => {
-                    event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
                     event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                     event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
                 });
+                elem.addEventListener('input', event => {
+                    event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
+                });
             };
 
             const validName = elem => {
                 elem.addEventListener('blur', event => {
-                    event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
                     event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                     event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                     event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() +
@@ -350,15 +351,20 @@ window.addEventListener('DOMContentLoaded', () => {
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
                 });
+                elem.addEventListener('input', event => {
+                    event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
+                });
             };
 
             //1
             mess.addEventListener('blur', event => {
-                event.target.value = event.target.value.replace(/([^а-яё -])/gi, '');
                 event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                 event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+            });
+            mess.addEventListener('input', event => {
+                event.target.value = event.target.value.replace(/[^а-яё -,.:;()!?"]/gi, '');
             });
 
             validName(name);
