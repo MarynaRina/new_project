@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
         updateClock();
         idInterval = setInterval(updateClock, 1000);
     };
-    countTimer('31 june 2021');
+    countTimer('30 june 2021');
 
     // scroll
     const clickAndScroll = () => {
@@ -319,12 +319,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const validPhone = elem =>  {
                 elem.addEventListener('blur', event => {
-                    event.target.value = event.target.value.replace(/([^0-9 () -])/gi, '');
                     event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                     event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+                });
 
+                elem.addEventListener('input', event => {
+                    event.target.value = event.target.value.replace(/[^+\d]/g, '');
                 });
             };
 
@@ -373,6 +375,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         };
         form();
+
     };
     inputValidation();
 
@@ -424,40 +427,65 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // send-ajax-form
     const sendForm = () => {
+
         const errorMessage = 'Что то пошло не так...',
             loadMessage = 'Загрузка...',
             successMessage = 'Спасибо! Мы с вами свяжемся!';
 
-        const form = document.getElementById('form1');
-
-        const statusMessage = document.createElement('div');
-        statusMessage.style.cssText = 'font-size: 2rem;';
-
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            form.appendChild(statusMessage);
-
+        const postData = (body, outpotData, errorData) => {
             const request = new XMLHttpRequest();
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'multipart/form-data');
-            const formData = new FormData(form);
-            request.send(formData);
-
             request.addEventListener('readystatechange', () => {
-                statusMessage.textContent = loadMessage;
 
                 if (request.readyState !== 4) {
                     return;
                 }
 
                 if (request.status === 200) {
-                    statusMessage.textContent = successMessage;
+                    outpotData();
                 } else {
-                    statusMessage.textContent = errorMessage;
+                    errorData(request.status);
                 }
-
             });
-        });
+
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            request.send(JSON.stringify(body));
+        };
+
+        const createMessage = elemForm => {
+            const form = document.getElementById(elemForm);
+
+            const statusMessage = document.createElement('div');
+            statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
+
+            form.addEventListener('submit', event => {
+
+                const formData = new FormData(form);
+                const body = {};
+
+                event.preventDefault();
+                form.appendChild(statusMessage);
+                statusMessage.textContent = loadMessage;
+
+                formData.forEach((val, key) => {
+                    body[key] = val;
+                });
+
+                postData(body, () => {
+                    statusMessage.textContent = successMessage;
+                    document.getElementById(elemForm).reset();
+                }, error => {
+                    console.error(error);
+                    statusMessage.textContent = errorMessage;
+                });
+            });
+        };
+
+        createMessage('form1');
+        createMessage('form2');
+        createMessage('form3');
+
     };
     sendForm();
 });
