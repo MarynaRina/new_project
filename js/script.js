@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 window.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line strict
     'use strict';
@@ -346,10 +347,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 elem.addEventListener('blur', event => {
                     event.target.value = event.target.value.replace(/( \s+)(^\s*$)/gi, '');
                     event.target.value = event.target.value.split(' ').filter(n => n).join(' ');
-                    event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() +
-                    e.slice(1)).join(" ");
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                     event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
+                    if (event.target.value) {
+                        event.target.value = event.target.value.split(' ').map(e => e[0].toUpperCase() +
+                    e.slice(1)).join(" ");
+                    } else {
+                        return;
+                    }
                 });
                 elem.addEventListener('input', event => {
                     event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
