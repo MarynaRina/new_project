@@ -484,13 +484,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     body[key] = val;
                 });
 
-                // postData(body, () => {
-                //     statusMessage.textContent = successMessage;
-                //
-                // }, error => {
-                //
-                //
-                // });
                 postData(body)
                     .then(() => {
                         statusMessage.textContent = successMessage;
