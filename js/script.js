@@ -443,8 +443,9 @@ window.addEventListener('DOMContentLoaded', () => {
             loadMessage = 'Загрузка...',
             successMessage = 'Спасибо! Мы с вами свяжемся!';
 
-        const postData = (body, outpotData, errorData) => {
+        const postData = body => new Promise((resolve, reject) => {
             const request = new XMLHttpRequest();
+
             request.addEventListener('readystatechange', () => {
 
                 if (request.readyState !== 4) {
@@ -452,9 +453,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (request.status === 200) {
-                    outpotData();
+                    resolve();
                 } else {
-                    errorData(request.status);
+                    reject(request.status);
                 }
             });
 
@@ -462,7 +463,7 @@ window.addEventListener('DOMContentLoaded', () => {
             request.setRequestHeader('Content-Type', 'application/json');
 
             request.send(JSON.stringify(body));
-        };
+        });
 
         const createMessage = elemForm => {
             const form = document.getElementById(elemForm);
@@ -483,20 +484,27 @@ window.addEventListener('DOMContentLoaded', () => {
                     body[key] = val;
                 });
 
-                postData(body, () => {
-                    statusMessage.textContent = successMessage;
-                    document.getElementById(elemForm).reset();
-                }, error => {
-                    console.error(error);
-                    statusMessage.textContent = errorMessage;
-                });
+                // postData(body, () => {
+                //     statusMessage.textContent = successMessage;
+                //
+                // }, error => {
+                //
+                //
+                // });
+                postData(body)
+                    .then(() => {
+                        statusMessage.textContent = successMessage;
+                        document.getElementById(elemForm).reset();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        statusMessage.textContent = errorMessage;
+                    });
             });
         };
-
         createMessage('form1');
         createMessage('form2');
         createMessage('form3');
-
     };
     sendForm();
 });
