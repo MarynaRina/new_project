@@ -13,10 +13,6 @@ import inputValidation from "./modules/inputValidation";
 import calc from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-
-
-
-
 // timer
 countTimer("9 July 2021");
 
