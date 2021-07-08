@@ -44,9 +44,11 @@ const inputValidation = () => {
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
                 event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
             });
+
             elem.addEventListener('input', event => {
                 event.target.value = event.target.value.replace(/[^a-z@-_.!~*']/gi, '');
             });
+
         };
 
         const validName = elem => {
@@ -62,6 +64,7 @@ const inputValidation = () => {
                     return;
                 }
             });
+
             elem.addEventListener('input', event => {
                 event.target.value = event.target.value.replace(/[^а-яё -]/gi, '');
             });
@@ -74,9 +77,33 @@ const inputValidation = () => {
             event.target.value = event.target.value.replaceAll(event.target.value.match(/-+/), '-');
             event.target.value = event.target.value.replaceAll(event.target.value.match(/ +/), ' ');
         });
+
         mess.addEventListener('input', event => {
             event.target.value = event.target.value.replace(/[^а-яё -,.:;()!?"]/gi, '');
         });
+
+        // const validLength = () => {
+        //     const form = document.getElementById("form1"),
+        //         formTwo = document.getElementById("form2"),
+        //         formThree = document.getElementById("form3");
+
+        //     const createDiv = document.createElement("div");
+        //     const errorMessage = "Введите данные правильно";
+        //     createDiv.style.cssText = "font-size: 2rem; color: red";
+
+        //     form.addEventListener('submit', e => {
+        //         if (name.value.length < 2 || email.value.length < 4 || phone.value.length < 6) {
+        //             e.preventDefault();
+        //             form.appendChild(createDiv);
+        //             createDiv.textContent = errorMessage;
+        //             return false;
+        //         } else {
+        //             e.preventDefault();
+        //             return true;
+        //         }
+        //     });
+
+        // };
 
         validName(name);
         validName(nameTwo);
@@ -89,6 +116,7 @@ const inputValidation = () => {
         validPhone(phone);
         validPhone(phoneTwo);
         validPhone(phoneThree);
+        // validLength();
 
     };
     form();
