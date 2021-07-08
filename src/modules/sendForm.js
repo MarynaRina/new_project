@@ -12,8 +12,8 @@ const sendForm = () => {
             errors.push('Имя должно быть больше 2 символов');
         } else if (email.value.length < 4) {
             errors.push('Неправильно введен email');
-        } else if (phone.value.length < 6) {
-            errors.push('Телефон не может быть короче 6 символов');
+        } else if (phone.value.length < 6 || phone.value.length > 13) {
+            errors.push('Телефон может быть не короче 6 и не больше 13 символов');
         }
         return errors;
     };

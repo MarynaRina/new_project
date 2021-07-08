@@ -1,12 +1,14 @@
+/* eslint-disable max-len */
 // eslint-disable-next-line strict
 "use strict";
+
 const countTimer = deadline => {
     const timerHours = document.querySelector("#timer-hours"),
         timerMinutes = document.querySelector("#timer-minutes"),
         timerSeconds = document.querySelector("#timer-seconds");
     let idInterval = 0;
 
-    function getTimeRemaining() {
+    const getTimeRemaining = () => {
         const dateStop = new Date(deadline).getTime(),
             dateNow = new Date().getTime(),
             timeRemaining = (dateStop - dateNow) / 1000;
@@ -19,7 +21,7 @@ const countTimer = deadline => {
             hours = Math.floor(timeRemaining / 60 / 60);
         }
         return { timeRemaining, hours, minutes, seconds };
-    }
+    };
 
     const zeroElem = elem => {
         if (String(elem).length === 1) {
@@ -44,3 +46,4 @@ const countTimer = deadline => {
 };
 
 export default countTimer;
+
