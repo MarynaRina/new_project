@@ -2,6 +2,7 @@
 "use strict";
 
 const sendForm = () => {
+
     const validForm = currentForm => {
         const name = currentForm.querySelector('.form-name'),
             email = currentForm.querySelector('.form-email'),
@@ -35,7 +36,6 @@ const sendForm = () => {
         const statusMessage = document.createElement("div");
         statusMessage.style.cssText = "font-size: 2rem; color: #fff";
         form.appendChild(statusMessage);
-
         form.addEventListener("submit", event => {
             event.preventDefault();
             const errors = validForm(form);
@@ -43,7 +43,6 @@ const sendForm = () => {
                 const formData = new FormData(form);
                 const body = {};
                 statusMessage.textContent = loadMessage;
-
                 formData.forEach((val, key) => {
                     body[key] = val;
                 });
